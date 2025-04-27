@@ -128,25 +128,3 @@ def export_to_elegant(lattice, suf: str="_1"):
         f.write(f"ring: line=({lattice.periodicity}*pe)\n")
     pass
 # ----------------------------------------------------------------------------------------------------------------------
-def ele_setup(lattice):
-    with open(f"{lattice.name}.ele", 'w', encoding='utf-8') as f:
-        f.write("&run_setup\n"
-                f"\t\tlattice = {lattice.name}.lat\n"
-                f"\t\tuse_beamline = \"RING\"\n"
-                f"\t\tp_central_mev = {lattice.energy * 1e-6}\n"
-                f"\t\tdefault_order = 2"
-                f"&end\n")
-
-        f.write("&twiss_output\n"
-                "\t\tstatistics = 1\n"
-                "\t\tradiation_integrals = 1\n"
-                "\t\toutput_at_each_step = 0\n"
-                "\t\thigher_order_chromaticity = 1\n"
-                "\t\tcompute_driving_terms = 1\n"
-                "\t\tfilename = %s.twi\n"
-                "&end\n")
-
-        f.write("&run_control\n"
-                "\t\tn_passes = 1000\n"
-                "&end\n")
-# ----------------------------------------------------------------------------------------------------------------------
